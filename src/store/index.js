@@ -23,7 +23,6 @@ export default new Vuex.Store({
     },
     setActiveBlog(state, blog) {
       state.activeBlog = blog
-      console.log(state.activeBlog);
     }
   },
   actions: {
@@ -53,9 +52,10 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
-    getActiveBlog({ commit }, blog) {
+    async getActiveBlog({ commit }, id) {
       try {
-        commit("setActiveBlog", blog)
+        let res = await api.get("blogs/" + id)
+        commit("setActiveBlog", res.data)
       } catch (error) {
         console.error(error)
       }
