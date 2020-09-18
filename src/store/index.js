@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     profile: {},
     blogs: [],
-    activeBlog: {}
+    activeBlog: {},
+    comments: []
   },
   mutations: {
     setProfile(state, profile) {
@@ -23,6 +24,10 @@ export default new Vuex.Store({
     },
     setActiveBlog(state, blog) {
       state.activeBlog = blog
+    },
+    setActiveComments(state, comments) {
+      state.comments = [...state.comments, comments]
+      console.log(state.comments)
     }
   },
   actions: {
@@ -37,17 +42,15 @@ export default new Vuex.Store({
     async getAllBlogs({ commit }) {
       try {
         let res = await api.get("blogs")
-        console.log(res);
         commit("setBlogs", res.data)
       } catch (error) {
         console.error(error)
       }
     },
-    async createBlog({ commit }, newBlog) {
+    async getCommentsByPost({ commit }, blogId) {
       try {
-        let res = await api.post("blogs", newBlog)
-        console.log(res);
-        commit("postBlog", res.data)
+        let res = await api.get(`blogs/${blogId}/comments`)
+        commit("setActiveComments", res.data)
       } catch (error) {
         console.error(error)
       }
@@ -60,5 +63,21 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async createBlog({ commit }, newBlog) {
+      try {
+        let res = await api.post("blogs", newBlog)
+        commit("postBlog", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async createComment({ commit }, commentData) {
+      try {
+        let res = await api.post('comments', commentData)
+        commit("setActiveComments", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   },
 });
