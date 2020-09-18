@@ -16,9 +16,9 @@
 
 <script>
 export default {
-  name: "BlogPost",
+  name: "blog-details",
   mounted() {
-    this.$store.dispatch("getBlogById", this.$route.params.id);
+    this.$store.dispatch("getActiveBlog", this.$route.params.blogId);
   },
   data() {
     return {};

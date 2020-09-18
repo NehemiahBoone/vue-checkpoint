@@ -17,16 +17,17 @@ const routes = [
     component: Home,
   },
   {
+    path: '/:blogId',
+    name: 'blog-details',
+    component: BlogPost,
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: Profile,
     beforeEnter: authGuard,
   },
-  {
-    path: '/blogPost/:id',
-    name: 'BlogPost',
-    component: BlogPost,
-  }
+
 ];
 
 const router = new VueRouter({

@@ -59,6 +59,9 @@ export default {
     blogs() {
       return this.$store.state.blogs;
     },
+    activeBlog() {
+      return this.$store.state.activeBlog;
+    },
   },
   methods: {
     createBlog() {

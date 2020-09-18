@@ -1,20 +1,20 @@
 <template>
-  <div class="blog col-3 my-4">
-    <router-link :to="{name: 'BlogPost', params: {id: blogInfo.id}}">
-      <div class="card border-info" @click.prevent="activeBlog">
+  <div class="col-3 my-4">
+    <div class="card border-info">
+      <router-link :to="{name:'blog-details', params:{blogId: blogInfo._id}}">
         <div class="card-body text-center">
           <h4 class="card-title text-primary">{{blogInfo.title}}</h4>
           <p class="card-text text-secondary">{{blogInfo.creatorEmail}}</p>
         </div>
-      </div>
-    </router-link>
+      </router-link>
+    </div>
   </div>
 </template>
 
 
 <script>
 export default {
-  name: "blog",
+  name: "blog-comp",
   props: {
     blogInfo: {
       type: Object,
@@ -24,12 +24,12 @@ export default {
   data() {
     return {};
   },
-  computed: {},
-  methods: {
-    activeBlog() {
-      this.$store.dispatch("getActiveBlog", this.blogInfo);
+  computed: {
+    profile() {
+      return this.$store.state.profile;
     },
   },
+  methods: {},
   components: {},
 };
 </script>
