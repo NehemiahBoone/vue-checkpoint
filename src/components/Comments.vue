@@ -1,6 +1,14 @@
 <template>
   <div class="comments">
-    <p>{{commentInfo.body}}</p>
+    <small>{{commentInfo.creatorEmail}}</small>
+    <p>
+      {{commentInfo.body}}
+      <i
+        v-if="commentInfo.creatorEmail == this.$auth.userInfo.name"
+        @click="editToggle = !editToggle"
+        class="fas fa-pencil-alt ml-1 text-secondary"
+      ></i>
+    </p>
   </div>
 </template>
 
@@ -17,6 +25,7 @@ export default {
   data() {
     return {
       newComment: {},
+      editToggle: false,
     };
   },
   computed: {

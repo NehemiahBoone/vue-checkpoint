@@ -90,6 +90,7 @@ export default {
         body: this.newComment.body,
       };
       this.$store.dispatch("createComment", commentData);
+      this.newComment = {};
     },
     deleteBlog() {
       this.blogInfo.id = this.$route.params.blogId;
