@@ -6,10 +6,15 @@
       <i
         v-if="commentInfo.creatorEmail == this.$auth.userInfo.name"
         @click="editToggle = !editToggle"
-        class="fas fa-pencil-alt ml-1 text-secondary"
+        class="fas fa-pencil-alt ml-1 text-secondary mx-1"
+      ></i>
+      <i
+        v-if="commentInfo.creatorEmail == this.$auth.userInfo.name"
+        @click="deleteComment"
+        class="fas fa-trash mx-1"
       ></i>
     </p>
-    <form class="form" @submit.prevent="editComment" v-if="editToggle">
+    <form class="form-inline" @submit.prevent="editComment" v-if="editToggle">
       <div>
         <input
           type="text"
@@ -56,6 +61,9 @@ export default {
       this.$store.dispatch("editComment", this.commentData);
       this.commentData = {};
       this.editToggle = false;
+    },
+    deleteComment() {
+      this.$store.dispatch("deleteComment", this.commentInfo);
     },
   },
   components: {},

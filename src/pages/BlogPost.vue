@@ -8,8 +8,6 @@
             <p class="card-text text-secondary">{{blog.body}}</p>
           </div>
         </div>
-        <button class="btn btn-danger mt-1" @click="deleteBlog">Delete</button>
-        <button class="btn btn-info mt-1 mx-1" @click="editToggle = !editToggle">Edit</button>
         <form class="form-inline" @submit.prevent="editBlog" v-if="editToggle">
           <input
             type="text"
@@ -27,6 +25,16 @@
           />
           <button type="submit" class="btn btn-warning">Edit Post</button>
         </form>
+        <button
+          v-if="this.blog.creatorEmail == this.$auth.userInfo.name"
+          class="btn btn-danger mt-1"
+          @click="deleteBlog"
+        >Delete</button>
+        <button
+          v-if="this.blog.creatorEmail == this.$auth.userInfo.name"
+          class="btn btn-info mt-1 mx-1"
+          @click="editToggle = !editToggle"
+        >Edit</button>
       </div>
     </div>
 
@@ -40,7 +48,7 @@
         </div>
       </div>
       <div class="col-12">
-        <form @submit.prevent="createComment" class="form-inline text-primary">
+        <form @submit.prevent="createComment" class="form-inline text-primary my-2">
           <div class="form-group p-1">
             <label class="mr-1" for="body"></label>
             <input
