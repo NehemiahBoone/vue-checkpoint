@@ -31,7 +31,7 @@ export default new Vuex.Store({
     },
     removeBlog(state, id) {
       state.activeBlog = state.blogs.filter(b => b.id != id)
-    }
+    },
   },
   actions: {
     async getProfile({ commit }) {
@@ -89,6 +89,14 @@ export default new Vuex.Store({
         router.push({ name: 'Home' })
       } catch (error) {
         console.error(error)
+      }
+    },
+    async editBlog({ commit }, blogInfo) {
+      try {
+        let res = await api.put('blogs/' + blogInfo.id, blogInfo)
+        commit("setActiveBlog", res.data)
+      } catch (error) {
+
       }
     }
   },

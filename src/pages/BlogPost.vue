@@ -9,6 +9,24 @@
           </div>
         </div>
         <button class="btn btn-danger mt-1" @click="deleteBlog">Delete</button>
+        <button class="btn btn-info mt-1 mx-1" @click="editToggle = !editToggle">Edit</button>
+        <form class="form-inline" @submit.prevent="editBlog" v-if="editToggle">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="New Blog Title"
+            aria-describedby="helpId"
+            v-model="blogInfo.title"
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="New Body"
+            aria-describedby="helpId"
+            v-model="blogInfo.body"
+          />
+          <button type="submit" class="btn btn-warning">Edit Post</button>
+        </form>
       </div>
     </div>
 
@@ -76,6 +94,11 @@ export default {
     deleteBlog() {
       this.blogInfo.id = this.$route.params.blogId;
       this.$store.dispatch("deleteBlog", this.blogInfo.id);
+    },
+    editBlog() {
+      this.blogInfo.id = this.$route.params.blogId;
+      this.$store.dispatch("editBlog", this.blogInfo);
+      this.editToggle = false;
     },
   },
   components: {
