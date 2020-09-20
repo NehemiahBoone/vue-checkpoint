@@ -9,6 +9,18 @@
         class="fas fa-pencil-alt ml-1 text-secondary"
       ></i>
     </p>
+    <form class="form" @submit.prevent="editComment" v-if="editToggle">
+      <div>
+        <input
+          type="text"
+          class="form-control my-1"
+          placeholder="Edit Comment..."
+          aria-describedby="helpId"
+          v-model="commentData.body"
+        />
+      </div>
+      <button type="submit" class="btn btn-warning">Post</button>
+    </form>
   </div>
 </template>
 
@@ -26,6 +38,7 @@ export default {
     return {
       newComment: {},
       editToggle: false,
+      commentData: {},
     };
   },
   computed: {
@@ -36,6 +49,13 @@ export default {
   methods: {
     createComment() {
       this.$store.dispatch("createComment", newComment);
+    },
+    editComment() {
+      this.commentData.id = this.commentInfo.id;
+      this.commentData.blog = this.$route.params.blogId;
+      this.$store.dispatch("editComment", this.commentData);
+      this.commentData = {};
+      this.editToggle = false;
     },
   },
   components: {},
