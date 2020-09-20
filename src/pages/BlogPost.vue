@@ -48,7 +48,11 @@
         </div>
       </div>
       <div class="col-12">
-        <form @submit.prevent="createComment" class="form-inline text-primary my-2">
+        <form
+          @submit.prevent="createComment"
+          class="form-inline text-primary my-2"
+          v-if="$auth.isAuthenticated"
+        >
           <div class="form-group p-1">
             <label class="mr-1" for="body"></label>
             <input

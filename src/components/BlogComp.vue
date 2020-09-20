@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3 my-4">
+  <div class="col-md-3 col-sm-12 my-4">
     <div class="card border-info">
       <router-link :to="{name:'blog-details', params:{blogId: blogInfo._id}}">
         <div class="card-body text-center">
