@@ -26,8 +26,11 @@ export default new Vuex.Store({
       state.activeBlog = blog
     },
     setActiveComments(state, comments) {
-      state.comments = [...state.comments, comments]
+      state.comments = comments
       console.log(state.comments)
+    },
+    removeBlog(state, id) {
+      state.activeBlog = state.blogs.filter(b => b.id != id)
     }
   },
   actions: {
@@ -75,6 +78,15 @@ export default new Vuex.Store({
       try {
         let res = await api.post('comments', commentData)
         commit("setActiveComments", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteBlog({ commit }, id) {
+      try {
+        await api.delete('blogs/' + id)
+        commit("removeBlog", id)
+        router.push({ name: 'Home' })
       } catch (error) {
         console.error(error)
       }

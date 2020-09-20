@@ -2,7 +2,11 @@
   <div class="home container-fluid">
     <div class="row">
       <div class="col-12 my-3">
-        <form @submit.prevent="createBlog" class="form-inline text-primary">
+        <form
+          @submit.prevent="createBlog"
+          class="form-inline text-primary"
+          v-if="$auth.isAuthenticated"
+        >
           <div class="form-group p-1">
             <label class="mr-1" for="title">Title</label>
             <input

@@ -8,6 +8,7 @@
             <p class="card-text text-secondary">{{blog.body}}</p>
           </div>
         </div>
+        <button class="btn btn-danger mt-1" @click="deleteBlog">Delete</button>
       </div>
     </div>
 
@@ -16,7 +17,7 @@
         <div class="card border-info">
           <div class="card-body">
             <h4 class="card-title text-primary">Comments</h4>
-            <comments v-for="comment in comments" :key="comment._id" :commentInfo="comment" />
+            <comments v-for="comment in commentsStore" :key="comment._id" :commentInfo="comment" />
           </div>
         </div>
       </div>
@@ -51,13 +52,16 @@ export default {
   data() {
     return {
       newComment: {},
+      blogInfo: {},
+      editToggle: false,
+      commentToggle: false,
     };
   },
   computed: {
     blog() {
       return this.$store.state.activeBlog;
     },
-    comments() {
+    commentsStore() {
       return this.$store.state.comments;
     },
   },
@@ -68,6 +72,10 @@ export default {
         body: this.newComment.body,
       };
       this.$store.dispatch("createComment", commentData);
+    },
+    deleteBlog() {
+      this.blogInfo.id = this.$route.params.blogId;
+      this.$store.dispatch("deleteBlog", this.blogInfo.id);
     },
   },
   components: {
