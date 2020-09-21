@@ -8,7 +8,7 @@
             <p class="card-text text-secondary">{{blog.body}}</p>
           </div>
         </div>
-        <form class="form-inline" @submit.prevent="editBlog" v-if="editToggle">
+        <form class="form-inline my-1" @submit.prevent="editBlog" v-if="editToggle">
           <input
             type="text"
             class="form-control"
@@ -23,7 +23,7 @@
             aria-describedby="helpId"
             v-model="blogInfo.body"
           />
-          <button type="submit" class="btn btn-warning">Edit Post</button>
+          <button type="submit" class="btn btn-warning mx-1">Edit Post</button>
         </form>
         <button
           v-if="this.blog.creatorEmail == this.$auth.userInfo.name"

@@ -27,16 +27,6 @@
               placeholder="Body..."
             />
           </div>
-          <div class="form-group p-1">
-            <label class="mr-1" for="imgUrl">Image Url</label>
-            <input
-              v-model="newBlog.imgUrl"
-              type="url"
-              name="imgUrl"
-              class="form-control"
-              placeholder="Image Url..."
-            />
-          </div>
           <button type="submit" class="btn btn-secondary">Post</button>
         </form>
       </div>

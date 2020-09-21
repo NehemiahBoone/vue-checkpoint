@@ -24,7 +24,7 @@
           v-model="commentData.body"
         />
       </div>
-      <button type="submit" class="btn btn-warning">Post</button>
+      <button type="submit" class="btn btn-warning mx-1">Post</button>
     </form>
   </div>
 </template>
@@ -52,9 +52,6 @@ export default {
     },
   },
   methods: {
-    createComment() {
-      this.$store.dispatch("createComment", newComment);
-    },
     editComment() {
       this.commentData.id = this.commentInfo.id;
       this.commentData.blog = this.$route.params.blogId;
